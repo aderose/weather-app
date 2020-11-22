@@ -12,24 +12,27 @@
   </head>
   <body>
     <header class="document-header container">
-      <h1>The Weather</h1>
       <i class="fas fa-cloud-sun-rain"></i>
     </header>
     <main class="container">
-      <form class="search-form">
-        <label for="search">Search City:</label>
-        <input
-          type="text"
-          name="search"
-          id="search"
-          class="search"
-          autocomplete="off"
-        />
-        <button type="submit" class="confirm">
-          <i class="fas fa-search"></i>
-        </button>
+      <form class="search-form" id="search-form" novalidate>
+        <label for="search">Search City</label>
+        <div class="search-bar" id="search-bar">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="search"
+            autocomplete="off"
+            pattern="[A-Za-z]+"
+          />
+          <button type="submit" class="confirm">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="error" id="error"></div>
       </form>
-      <div class="content"></div>
+      <div id="content"></div>
     </main>
     <script src="main.js"></script>
   </body>
