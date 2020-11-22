@@ -9,7 +9,6 @@ export default (function card(doc) {
     windSpeed,
   }) {
     return `
-      <section class="card">
       <h2>${location}</h2>
       <div class="card-body">
         <div class="summary">
@@ -32,8 +31,7 @@ export default (function card(doc) {
             <p>${windSpeed}mph</p>
           </div>
         </div>
-      </div>
-    </section>`;
+      </div>`;
   }
 
   function create({
@@ -46,6 +44,7 @@ export default (function card(doc) {
     windSpeed,
   }) {
     const element = doc.createElement('section');
+    element.classList.add('card');
     element.innerHTML = generateHtml({
       location,
       temperature,
