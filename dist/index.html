@@ -4,9 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
     <title>Weather App</title>
   </head>
   <body>
+    <header class="document-header container">
+      <h1>The Weather</h1>
+      <i class="fas fa-cloud-sun-rain"></i>
+    </header>
+    <main class="container">
+      <section class="card">
+        <h2>Location</h2>
+        <div class="card-body">
+          <div class="summary">
+            <h3>30°C</h3>
+            <img
+              src="https://openweathermap.org/img/wn/09n@2x.png"
+              alt="Weather icon"
+            />
+          </div>
+          <div class="description">
+            <p>Add weather description here.</p>
+          </div>
+          <div class="extra-details">
+            <div class="humidity">
+              <i class="fas fa-tint"></i>
+              <p>80%</p>
+            </div>
+            <div class="wind">
+              <i class="fas fa-wind"></i>
+              <p>30mph</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
