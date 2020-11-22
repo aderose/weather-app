@@ -33,26 +33,10 @@ export default (function card(doc) {
         </div>`;
   }
 
-  function create({
-    location,
-    temperature,
-    measurement,
-    imageCode,
-    description,
-    humidity,
-    windSpeed,
-  }) {
+  function create(details) {
     const element = doc.createElement('section');
     element.classList.add('card');
-    element.innerHTML = generateHtml({
-      location,
-      temperature,
-      measurement,
-      imageCode,
-      description,
-      humidity,
-      windSpeed,
-    });
+    element.innerHTML = generateHtml(details);
     return element;
   }
 
