@@ -30,8 +30,7 @@ export default (function card(doc) {
             <i class="fas fa-wind"></i>
             <p>${windSpeed}mph</p>
           </div>
-        </div>
-      </div>`;
+        </div>`;
   }
 
   function create({
