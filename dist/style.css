@@ -11,10 +11,11 @@
 /* Variables */
 :root {
   --primary: #e65100;
+  --highlight: #e6510054;
   --secondary: rgb(63, 63, 63);
   --tertiary: #fff3e0;
   --clear: white;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow: rgba(0, 0, 0, 0.05);
 }
 
 /* General styles */
@@ -25,6 +26,7 @@ body {
 
 .container {
   max-width: 400px;
+  min-width: 275px;
   margin: 0 auto;
 }
 
@@ -65,27 +67,30 @@ body {
 /* Form styling */
 .search-form {
   background-color: var(--clear);
-  margin: 2em 0.5em 2em 0.5em;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  margin: 2em 0;
+  padding: 0 20px;
   border-radius: 5px;
   box-shadow: 0 0 3px 2px var(--shadow);
 }
 
 .search-form label {
-  font-weight: 700;
+  line-height: 2.3em;
   font-size: 1.25em;
   color: var(--primary);
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--tertiary);
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
 .search {
   border: none;
-  border-radius: 5px;
-  padding: 0.75em 3em 0.75em 0.75em;
-  margin-top: 0.5em;
-  font-size: 1em;
+  width: 100%;
+  font-size: 1.5em;
   color: var(--secondary);
   background-color: var(--tertiary);
 }
@@ -95,19 +100,26 @@ body {
 }
 
 .confirm {
-  position: absolute;
-  right: 1.25em;
-  top: 30%;
-  bottom: 0;
   background-color: transparent;
   color: var(--primary);
   border: none;
   cursor: pointer;
   font-size: 1.5em;
+  margin-left: 0.5em;
 }
 
 .confirm:focus {
   outline: none;
+}
+
+.error {
+  display: block;
+  height: 2.3em;
+  line-height: 2.3em;
+}
+
+.invalid {
+  box-shadow: 0 0 3px 3px var(--highlight);
 }
 
 /* Card formatting */
@@ -116,7 +128,6 @@ body {
   color: var(--primary);
   box-shadow: 0 0 3px 2px var(--shadow);
   border-radius: 5px;
-  margin: 0 0.5em;
   display: flex;
   flex-direction: column;
   overflow: hidden;
