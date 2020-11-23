@@ -18,9 +18,7 @@ export default (function card(doc) {
             alt="Weather icon"
           />
         </div>
-        <div class="description">
-          <p>${description}</p>
-        </div>
+        <p class="description">${description}</p>
         <div class="extra-details">
           <div class="humidity">
             <i class="fas fa-tint"></i>
