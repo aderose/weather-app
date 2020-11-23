@@ -1,3 +1,5 @@
+import pubsub from './pubsub';
+
 export default class SearchForm {
   constructor({ formId, inputId, barId, errorId }) {
     this.searchForm = document.querySelector(formId);
@@ -21,7 +23,7 @@ export default class SearchForm {
     this.searchForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!this.isValidInput()) return;
-      console.log(this.search.value);
+      pubsub.publish('search', this.search.value);
     });
   }
 }

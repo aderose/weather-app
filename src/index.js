@@ -1,5 +1,6 @@
 import card from './card';
 import SearchForm from './SearchForm';
+import pubsub from './pubsub';
 
 window.addEventListener('load', () => {
   const content = document.querySelector('#content');
@@ -13,6 +14,10 @@ window.addEventListener('load', () => {
   });
 
   searchForm.listen();
+
+  pubsub.subscribe('search', (data) => {
+    console.log(data);
+  });
 
   // create and display a weather card with the provided details
   function displayCard(details) {
