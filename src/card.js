@@ -33,10 +33,22 @@ export default (function card(doc) {
         </div>`;
   }
 
-  function create(details) {
+  function generateError({ error, message }) {
+    return `
+      <h2>${error}</h2>
+      <div class="card-body error-message">
+        ${message}
+      </div>
+    `;
+  }
+
+  function create(error, details) {
     const element = doc.createElement('section');
     element.classList.add('card');
-    element.innerHTML = generateHtml(details);
+    element.innerHTML =
+      error === undefined
+        ? generateHtml(details)
+        : generateError({ error, message: details });
     return element;
   }
 
