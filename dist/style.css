@@ -140,11 +140,11 @@ body {
   line-height: 2em;
 }
 
-.description p {
+.description {
   color: var(--secondary);
 }
 
-.description p::first-letter {
+.description::first-letter {
   text-transform: uppercase;
 }
 
