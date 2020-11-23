@@ -9,9 +9,15 @@ window.addEventListener('load', () => {
   // create and display a weather card with the provided details
   function displayCard(data) {
     content.innerHTML = '';
-    const weather = data.weather[0];
-    content.appendChild(
-      card.create({
+    let outputCard;
+    if (data.error !== undefined) {
+      outputCard = card.create(
+        data.error,
+        `Can't find any results for "${data.search}".`
+      );
+    } else {
+      const weather = data.weather[0];
+      outputCard = card.create(undefined, {
         location: `${data.name}, ${data.sys.country}`,
         temperature: Math.round(data.main.temp - 273.15),
         measurement: 'C',
@@ -19,23 +25,29 @@ window.addEventListener('load', () => {
         description: weather.description,
         humidity: data.main.humidity,
         windSpeed: Math.round(data.wind.speed * 2.23694),
-      })
-    );
+      });
+    }
+    content.appendChild(outputCard);
   }
 
-  async function fetchData(search) {
+  function fetchData(search) {
     return fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${config.WEATHER_API_KEY}`
-    ).then((response) => response.json());
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.cod === '404') throw Error('City not found');
+        return data;
+      })
+      .catch((error) => {
+        return { error, search };
+      });
   }
 
-  async function processSearch(searchTerm) {
-    try {
-      const data = await fetchData(searchTerm);
+  function processSearch(searchTerm) {
+    fetchData(searchTerm).then((data) => {
       displayCard(data);
-    } catch (err) {
-      console.log('City not found.');
-    }
+    });
   }
 
   // create a form object and listen
