@@ -24,6 +24,7 @@ export default class SearchForm {
       e.preventDefault();
       if (!this.isValidInput()) return;
       pubsub.publish('search', this.search.value);
+      this.search.value = '';
     });
   }
 }
