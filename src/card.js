@@ -33,10 +33,22 @@ export default (function card(doc) {
         </div>`;
   }
 
-  function create(details) {
+  function generateError({ input, error }) {
+    return `
+      <h2>${error}</h2>
+      <div class="card-body error-message">
+        The search term "${input}" is not a City.
+      </div>
+    `;
+  }
+
+  function create(error, details) {
     const element = doc.createElement('section');
     element.classList.add('card');
-    element.innerHTML = generateHtml(details);
+    element.innerHTML =
+      error === undefined
+        ? generateHtml(details)
+        : generateError({ input: details, error });
     return element;
   }
 
