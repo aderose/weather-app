@@ -15,6 +15,7 @@
   \***************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 7:0-14 */
 /***/ ((module) => {
 
 eval("function _classCallCheck(instance, Constructor) {\n  if (!(instance instanceof Constructor)) {\n    throw new TypeError(\"Cannot call a class as a function\");\n  }\n}\n\nmodule.exports = _classCallCheck;\n\n//# sourceURL=webpack://weather-app/./node_modules/@babel/runtime/helpers/classCallCheck.js?");
@@ -27,6 +28,7 @@ eval("function _classCallCheck(instance, Constructor) {\n  if (!(instance instan
   \************************************************************/
 /*! unknown exports (runtime-defined) */
 /*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 17:0-14 */
 /***/ ((module) => {
 
 eval("function _defineProperties(target, props) {\n  for (var i = 0; i < props.length; i++) {\n    var descriptor = props[i];\n    descriptor.enumerable = descriptor.enumerable || false;\n    descriptor.configurable = true;\n    if (\"value\" in descriptor) descriptor.writable = true;\n    Object.defineProperty(target, descriptor.key, descriptor);\n  }\n}\n\nfunction _createClass(Constructor, protoProps, staticProps) {\n  if (protoProps) _defineProperties(Constructor.prototype, protoProps);\n  if (staticProps) _defineProperties(Constructor, staticProps);\n  return Constructor;\n}\n\nmodule.exports = _createClass;\n\n//# sourceURL=webpack://weather-app/./node_modules/@babel/runtime/helpers/createClass.js?");
@@ -45,6 +47,21 @@ eval("function _defineProperties(target, props) {\n  for (var i = 0; i < props.l
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ SearchForm\n/* harmony export */ });\n/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ \"./node_modules/@babel/runtime/helpers/classCallCheck.js\");\n/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ \"./node_modules/@babel/runtime/helpers/createClass.js\");\n/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pubsub */ \"./src/pubsub.js\");\n\n\n\n\nvar SearchForm = /*#__PURE__*/function () {\n  function SearchForm(_ref) {\n    var formId = _ref.formId,\n        inputId = _ref.inputId,\n        barId = _ref.barId,\n        errorId = _ref.errorId;\n\n    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_0___default()(this, SearchForm);\n\n    this.searchForm = document.querySelector(formId);\n    this.search = document.querySelector(inputId);\n    this.searchBar = document.querySelector(barId);\n    this.error = document.querySelector(errorId);\n  }\n\n  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(SearchForm, [{\n    key: \"isValidInput\",\n    value: function isValidInput() {\n      if (this.search.validity.valid && this.search.value.length > 0) {\n        this.searchBar.classList.remove('invalid');\n        this.error.textContent = '';\n        return true;\n      }\n\n      this.searchBar.classList.add('invalid');\n      this.error.textContent = 'Please provide a city name only.';\n      return false;\n    }\n  }, {\n    key: \"listen\",\n    value: function listen() {\n      var _this = this;\n\n      this.searchForm.addEventListener('submit', function (e) {\n        e.preventDefault();\n        if (!_this.isValidInput()) return;\n        _pubsub__WEBPACK_IMPORTED_MODULE_2__.default.publish('search', _this.search.value);\n        _this.search.value = '';\n      });\n    }\n  }]);\n\n  return SearchForm;\n}();\n\n\n\n//# sourceURL=webpack://weather-app/./src/SearchForm.js?");
+
+/***/ }),
+
+/***/ "./src/api.js":
+/*!********************!*\
+  !*** ./src/api.js ***!
+  \********************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./config */ \"./src/config.js\");\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function api() {\n  function search(searchTerm) {\n    return fetch(\"\".concat(_config__WEBPACK_IMPORTED_MODULE_0__.default.API_URL, \"?q=\").concat(searchTerm, \"&appid=\").concat(_config__WEBPACK_IMPORTED_MODULE_0__.default.WEATHER_API_KEY)).then(function (response) {\n      return response.json();\n    }).then(function (data) {\n      if (data.cod === '404') throw Error('City not found');\n      return data;\n    }).catch(function (error) {\n      return {\n        error: error,\n        searchTerm: searchTerm\n      };\n    });\n  }\n\n  return {\n    search: search\n  };\n})());\n\n//# sourceURL=webpack://weather-app/./src/api.js?");
 
 /***/ }),
 
@@ -74,7 +91,22 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  WEATHER_API_KEY: '4db8dfd38c1e12292c2137af58fa8da8'\n});\n\n//# sourceURL=webpack://weather-app/./src/config.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  API_URL: 'https://api.openweathermap.org/data/2.5/weather',\n  WEATHER_API_KEY: '4db8dfd38c1e12292c2137af58fa8da8'\n});\n\n//# sourceURL=webpack://weather-app/./src/config.js?");
+
+/***/ }),
+
+/***/ "./src/displayManager.js":
+/*!*******************************!*\
+  !*** ./src/displayManager.js ***!
+  \*******************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card */ \"./src/card.js\");\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function displayManager() {\n  var display = document.querySelector('#content'); // create a weather or error card\n\n  function createCard(data) {\n    if (data.error !== undefined) {\n      return _card__WEBPACK_IMPORTED_MODULE_0__.default.create(data.error, \"Can't find any results for \\\"\".concat(data.searchTerm, \"\\\".\"));\n    }\n\n    var weather = data.weather[0];\n    return _card__WEBPACK_IMPORTED_MODULE_0__.default.create(undefined, {\n      location: \"\".concat(data.name, \", \").concat(data.sys.country),\n      temperature: Math.round(data.main.temp - 273.15),\n      measurement: 'C',\n      imageCode: weather.icon,\n      description: weather.description,\n      humidity: data.main.humidity,\n      windSpeed: Math.round(data.wind.speed * 2.23694)\n    });\n  } // display the newly created card\n\n\n  function displayCard(data) {\n    display.innerHTML = '';\n    display.appendChild(createCard(data));\n  }\n\n  return {\n    displayCard: displayCard\n  };\n})());\n\n//# sourceURL=webpack://weather-app/./src/displayManager.js?");
 
 /***/ }),
 
@@ -88,7 +120,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card */ \"./src/card.js\");\n/* harmony import */ var _SearchForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchForm */ \"./src/SearchForm.js\");\n/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pubsub */ \"./src/pubsub.js\");\n/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./config */ \"./src/config.js\");\n\n\n\n\nwindow.addEventListener('load', function () {\n  var content = document.querySelector('#content'); // create and display a weather card with the provided details\n\n  function displayCard(data) {\n    content.innerHTML = '';\n    var outputCard;\n\n    if (data.error !== undefined) {\n      outputCard = _card__WEBPACK_IMPORTED_MODULE_0__.default.create(data.error, \"Can't find any results for \\\"\".concat(data.search, \"\\\".\"));\n    } else {\n      var weather = data.weather[0];\n      outputCard = _card__WEBPACK_IMPORTED_MODULE_0__.default.create(undefined, {\n        location: \"\".concat(data.name, \", \").concat(data.sys.country),\n        temperature: Math.round(data.main.temp - 273.15),\n        measurement: 'C',\n        imageCode: weather.icon,\n        description: weather.description,\n        humidity: data.main.humidity,\n        windSpeed: Math.round(data.wind.speed * 2.23694)\n      });\n    }\n\n    content.appendChild(outputCard);\n  }\n\n  function fetchData(search) {\n    return fetch(\"https://api.openweathermap.org/data/2.5/weather?q=\".concat(search, \"&appid=\").concat(_config__WEBPACK_IMPORTED_MODULE_3__.default.WEATHER_API_KEY)).then(function (response) {\n      return response.json();\n    }).then(function (data) {\n      if (data.cod === '404') throw Error('City not found');\n      return data;\n    }).catch(function (error) {\n      return {\n        error: error,\n        search: search\n      };\n    });\n  }\n\n  function processSearch(searchTerm) {\n    fetchData(searchTerm).then(function (data) {\n      displayCard(data);\n    });\n  } // create a form object and listen\n\n\n  var searchForm = new _SearchForm__WEBPACK_IMPORTED_MODULE_1__.default({\n    formId: '#search-form',\n    inputId: '#search',\n    barId: '#search-bar',\n    errorId: '#error'\n  });\n  searchForm.listen();\n  _pubsub__WEBPACK_IMPORTED_MODULE_2__.default.subscribe('search', processSearch);\n});\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _displayManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./displayManager */ \"./src/displayManager.js\");\n/* harmony import */ var _SearchForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchForm */ \"./src/SearchForm.js\");\n/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api */ \"./src/api.js\");\n/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pubsub */ \"./src/pubsub.js\");\n\n\n\n\n\nfunction controller() {\n  // search api for searchterm and display card for that data\n  function processSearch(searchTerm) {\n    _api__WEBPACK_IMPORTED_MODULE_2__.default.search(searchTerm).then(function (data) {\n      _displayManager__WEBPACK_IMPORTED_MODULE_0__.default.displayCard(data);\n    });\n  } // create a form object and listen\n\n\n  var searchForm = new _SearchForm__WEBPACK_IMPORTED_MODULE_1__.default({\n    formId: '#search-form',\n    inputId: '#search',\n    barId: '#search-bar',\n    errorId: '#error'\n  });\n  searchForm.listen();\n  _pubsub__WEBPACK_IMPORTED_MODULE_3__.default.subscribe('search', processSearch);\n}\n\nwindow.addEventListener('load', controller);\n\n//# sourceURL=webpack://weather-app/./src/index.js?");
 
 /***/ }),
 

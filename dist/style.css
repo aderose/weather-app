@@ -140,8 +140,12 @@ body {
   line-height: 2em;
 }
 
-.card p {
+.description p {
   color: var(--secondary);
+}
+
+.description p::first-letter {
+  text-transform: uppercase;
 }
 
 .card-body {
