@@ -16,12 +16,23 @@
   --tertiary: #fff3e0;
   --clear: white;
   --shadow: rgba(0, 0, 0, 0.05);
+  --unselected: rgba(255, 255, 255, 0.4);
 }
 
 /* General styles */
 body {
   background-color: var(--tertiary);
   font-size: 16px;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }
 
 .container {
@@ -133,15 +144,18 @@ body {
   overflow: hidden;
 }
 
-.card h2 {
+.card-header {
   background-color: var(--primary);
   color: var(--clear);
   padding: 0 20px;
-  line-height: 2em;
+  line-height: 3em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .description {
   color: var(--secondary);
+  margin-bottom: 1em;
 }
 
 .description::first-letter {
@@ -173,10 +187,6 @@ body {
   filter: brightness(75%);
 }
 
-.description {
-  margin-bottom: 1em;
-}
-
 .extra-details {
   display: flex;
   justify-content: space-between;
@@ -191,4 +201,26 @@ body {
 .wind p,
 .humidity p {
   margin-left: 0.5em;
+}
+
+/* Custom radio button formatting */
+.button-container {
+  margin: 0 0.2em;
+  cursor: pointer;
+}
+
+.button-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio {
+  font-size: 1.75em;
+  color: var(--unselected);
+  user-select: none;
+}
+
+.button-container input:checked ~ .radio {
+  color: var(--clear);
 }
