@@ -6,7 +6,9 @@ import pubsub from './pubsub';
 function controller() {
   // search api for searchterm and display card for that data
   function processSearch(searchTerm) {
+    displayManager.toggleLoading(true);
     api.search(searchTerm).then((data) => {
+      displayManager.toggleLoading(false);
       displayManager.displayCard(data);
     });
   }
