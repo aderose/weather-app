@@ -9,10 +9,24 @@ export default (function card(doc) {
     windSpeed,
   }) {
     return `
-      <h2>${location}</h2>
+      <div class="card-header">
+        <h2>${location}</h2>
+        <div class="buttons">
+          <label class="button-container">
+            <input type="radio" name="metric" checked>
+            <span class="radio">°C</span>
+          </label>
+          <label class="button-container">
+            <input type="radio" name="metric">
+            <span class="radio">°F</span>
+          </label>
+        </div>
+      </div>
       <div class="card-body">
         <div class="summary">
-          <h3>${temperature}°${measurement}</h3>
+          <h3>
+            <span id="temperature">${temperature}</span><span id="metric">°${measurement}</span>
+          </h3>
           <img
             src="https://openweathermap.org/img/wn/${imageCode}@2x.png"
             alt="Weather icon"
@@ -28,12 +42,16 @@ export default (function card(doc) {
             <i class="fas fa-wind"></i>
             <p>${windSpeed}mph</p>
           </div>
-        </div>`;
+        </div>
+      </div>
+    `;
   }
 
   function generateError({ error, message }) {
     return `
-      <h2>${error}</h2>
+      <div class="card-header">
+        <h2>${error}</h2>
+      </div>
       <div class="card-body error-message">
         ${message}
       </div>
@@ -43,12 +61,23 @@ export default (function card(doc) {
   function create(error, details) {
     const element = doc.createElement('section');
     element.classList.add('card');
-    element.innerHTML =
-      error === undefined
-        ? generateHtml(details)
-        : generateError({ error, message: details });
+    if (error === undefined) {
+      element.innerHTML = generateHtml(details);
+    } else {
+      element.innerHTML = generateError({ error, message: details });
+    }
     return element;
   }
 
-  return { create };
+  function updateTemperature(newMetric) {
+    const container = document.querySelector('.summary h3');
+    const temp = container.firstElementChild.textContent;
+    const newTemp = Math.round(
+      newMetric === '°F' ? temp * (9 / 5) + 32 : (temp - 32) * (5 / 9)
+    );
+    container.firstElementChild.textContent = newTemp;
+    container.lastElementChild.textContent = newMetric;
+  }
+
+  return { create, updateTemperature };
 })(document);
