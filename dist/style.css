@@ -224,3 +224,8 @@ button:focus {
 .button-container input:checked ~ .radio {
   color: var(--clear);
 }
+
+/* Centralise loading image */
+#content {
+  text-align: center;
+}
