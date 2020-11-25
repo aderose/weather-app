@@ -25,7 +25,7 @@ export default (function card(doc) {
       <div class="card-body">
         <div class="summary">
           <h3>
-            <span id="temperature">${temperature}</span>°<span id="metric">${measurement}</span>
+            <span id="temperature">${temperature}</span><span id="metric">°${measurement}</span>
           </h3>
           <img
             src="https://openweathermap.org/img/wn/${imageCode}@2x.png"
@@ -69,5 +69,15 @@ export default (function card(doc) {
     return element;
   }
 
-  return { create };
+  function updateTemperature(newMetric) {
+    const container = document.querySelector('.summary h3');
+    const temp = container.firstElementChild.textContent;
+    const newTemp = Math.round(
+      newMetric === '°F' ? temp * (9 / 5) + 32 : (temp - 32) * (5 / 9)
+    );
+    container.firstElementChild.textContent = newTemp;
+    container.lastElementChild.textContent = newMetric;
+  }
+
+  return { create, updateTemperature };
 })(document);
