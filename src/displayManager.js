@@ -36,10 +36,19 @@ export default (function displayManager() {
 
   // display the newly created card and listen for changes
   function displayCard(data) {
-    display.innerHTML = '';
     display.appendChild(createCard(data));
     listenForChange();
   }
 
-  return { displayCard };
+  function toggleLoading(isLoading) {
+    display.innerHTML = '';
+    if (isLoading) {
+      const image = document.createElement('img');
+      image.setAttribute('src', '../assets/loading.gif');
+      image.setAttribute('alt', 'loading');
+      display.appendChild(image);
+    }
+  }
+
+  return { displayCard, toggleLoading };
 })();
