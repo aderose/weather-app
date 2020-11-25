@@ -156,6 +156,7 @@ button:focus {
 .description {
   color: var(--secondary);
   margin-bottom: 1em;
+  text-align: left;
 }
 
 .description::first-letter {
@@ -169,6 +170,7 @@ button:focus {
 .error-message {
   padding-top: 20px;
   color: var(--secondary);
+  text-align: left;
 }
 
 .summary {
