@@ -226,6 +226,6 @@ button:focus {
 }
 
 /* Centralise loading image */
-#content {
+.content {
   text-align: center;
 }
